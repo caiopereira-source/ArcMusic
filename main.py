@@ -106,6 +106,12 @@ def list_downloader():
     return render_template('list_downloader.html')
 
 
+@app.route('/video-downloader', methods=['GET', 'POST'])
+def video_downloader():
+    # think about it later!
+    pass
+
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")

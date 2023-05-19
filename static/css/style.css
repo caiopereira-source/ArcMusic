@@ -1,6 +1,5 @@
 .navbar {
     background-color: #282828;
-
 }
 
 .send-button{
@@ -10,11 +9,13 @@ font-weight: 600;
 color:#fff;
 padding: 8px 25px;
 }
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .g-button{
 color: #fff !important;
 border: 1px solid #EA4335;
@@ -24,27 +25,32 @@ font-weight: 600;
 color:#fff;
 padding: 8px 25px;
 }
+
 .my-input{
 box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 cursor: text;
 padding: 8px 10px;
 transition: border .1s linear;
 }
+
 .header-title{
 margin: 5rem 0;
 }
+
 h1{
 font-size: 31px;
 line-height: 40px;
 font-weight: 600;
 color:#4c5357;
 }
+
 h2{
 color: #5e8396;
 font-size: 21px;
 line-height: 32px;
 font-weight: 400;
 }
+
 .login-or {
 position: relative;
 color: #aaa;
@@ -53,6 +59,7 @@ margin-bottom: 10px;
 padding-top: 10px;
 padding-bottom: 10px;
 }
+
 .span-or {
 display: block;
 position: absolute;
@@ -63,15 +70,18 @@ background-color: #fff;
 width: 50px;
 text-align: center;
 }
+
 .hr-or {
 height: 1px;
 margin-top: 0px !important;
 margin-bottom: 0px !important;
 }
+
 @media screen and (max-width:480px){
 h1{
 font-size: 26px;
 }
+
 h2{
 font-size: 20px;
 }
