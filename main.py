@@ -8,9 +8,9 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'info@4004'
-UPLOAD_FOLDER = './upload'
 CWD = os.path.expanduser(os.getcwd())
-OUTPUT_FOLDER = './output'
+OUTPUT_FOLDER = os.path.join(CWD, "output")
+UPLOAD_FOLDER = os.path.join(CWD, "upload")
 
 
 @app.route('/')
@@ -20,11 +20,10 @@ def home():
 
 @app.route('/downloader', methods=['GET', 'POST'])
 def youtube_downloader():
-    dir_name = os.path.expanduser('~/PycharmProjects/ArcMusic')
-    path = os.listdir(dir_name)
+    path = os.listdir(OUTPUT_FOLDER)
     for item in path:
         if item.endswith(".mp3"):
-            os.remove(os.path.join(dir_name, item))
+            os.remove(os.path.join(OUTPUT_FOLDER, item))
 
     if request.method == 'POST':
         link = request.form.get('link')
@@ -38,10 +37,9 @@ def youtube_downloader():
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
-            'outtmpl': '%(title)s.%(ext)s',
-
-
+            'outtmpl': './output/%(title)s.%(ext)s',
         }
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             try:
                 info_dict = ydl.extract_info(link, download=False)
@@ -89,7 +87,6 @@ def list_downloader():
                     'preferredquality': '192',
                 }],
                 'outtmpl': './output/%(title)s.%(ext)s',
-
             }
             with open("./upload/list.txt") as file:
                 for line in file:
@@ -102,7 +99,7 @@ def list_downloader():
                             pass
 
                 shutil.make_archive(zipname, 'zip', './output')
-            return send_file('./musics.zip')
+            return send_file('./musics.zip', as_attachment=True)
     return render_template('list_downloader.html')
 
 
