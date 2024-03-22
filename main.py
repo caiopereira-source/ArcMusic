@@ -12,7 +12,6 @@ CWD = os.path.expanduser(os.getcwd())
 OUTPUT_FOLDER = os.path.join(CWD, "output")
 UPLOAD_FOLDER = os.path.join(CWD, "upload")
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -24,6 +23,8 @@ def youtube_downloader():
     for item in path:
         if item.endswith(".mp3"):
             os.remove(os.path.join(OUTPUT_FOLDER, item))
+    
+    bool_loader = 'false'
 
     if request.method == 'POST':
         link = request.form.get('link')
@@ -45,15 +46,16 @@ def youtube_downloader():
                 info_dict = ydl.extract_info(link, download=False)
                 video_title = info_dict.get('title', None)
                 ydl.download(link)
+                bool_loader = 'true'
             except yt_dlp.DownloadError:
                 flash('Link Inválido!')
                 return redirect(url_for('youtube_downloader'))
             except FileNotFoundError:
                 flash('Algum erro inesperado ocorreu!')
                 return redirect(url_for('youtube_downloader'))
-        return send_file(f'{video_title}.mp3', as_attachment=True)
+        return send_file(f'output/{video_title}.mp3', as_attachment=True)
 
-    return render_template('donwloader.html')
+    return render_template('donwloader.html', bool_loader=bool_loader)
 
 
 @app.route('/list-downloader', methods=['GET', 'POST'])
