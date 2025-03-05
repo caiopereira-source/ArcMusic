@@ -16,7 +16,7 @@ UPLOAD_FOLDER = os.path.join(CWD, "upload")
 def home():
     if not os.path.exists('./output'):
         os.makedirs('output')
-        
+
     if not os.path.exists('./upload'):
         os.makedirs('upload')
 
@@ -38,6 +38,8 @@ def youtube_downloader():
             flash('Link Inválido!')
             return redirect(url_for('youtube_downloader'))
         ydl_opts = {
+            'ffmpeg_location': r'C:\ffmpeg-bin\bin\ffmpeg.exe',
+            'ffprobe-location': r'C:\ffmpeg-bin\bin\ffprobe.exe',
             'format': 'bestaudio/best',
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
