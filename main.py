@@ -14,6 +14,12 @@ UPLOAD_FOLDER = os.path.join(CWD, "upload")
 
 @app.route('/')
 def home():
+    if not os.path.exists('./output'):
+        os.makedirs('output')
+        
+    if not os.path.exists('./upload'):
+        os.makedirs('upload')
+
     return render_template('index.html')
 
 
